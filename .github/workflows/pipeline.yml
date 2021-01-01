@@ -48,10 +48,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
       - name: Slack notification
-          uses: 8398a7/action-slack@v3
-          if: ${{ (success() && github.event_name == 'push') || failure() }}
-          with:
-            status: ${{ job.status }}
-            fields: repo,message,commit,author,action,eventName,ref,workflow,job,took 
-          env:
-            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} 
+        uses: 8398a7/action-slack@v3
+        if: ${{ (success() && github.event_name == 'push') || failure() }}
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took 
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} 
