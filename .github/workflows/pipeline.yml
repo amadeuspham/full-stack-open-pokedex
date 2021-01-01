@@ -35,8 +35,14 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "amadeuspokedex" #Must be unique in Heroku
+          heroku_app_name: "amadeuspokedex" 
           heroku_email: "scramblegf@gmail.com"
           healthcheck: "https://amadeuspokedex.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        if: ${{ github.event_name == 'push' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
