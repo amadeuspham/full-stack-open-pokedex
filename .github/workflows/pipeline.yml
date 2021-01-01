@@ -36,8 +36,7 @@ jobs:
         run: echo "$COMMIT_MESSAGES"
       - name: deploy
         uses: akhileshns/heroku-deploy@v3.8.8
-        if: ${{ github.event_name == 'push' }}
-        if: ${{!contains(github.event.commits.*.message, '#skip')${{
+        if: ${{ github.event_name == 'push' && !contains(github.event.commits.*.message, '#skip')${{
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "amadeuspokedex" 
@@ -47,8 +46,7 @@ jobs:
           rollbackonhealthcheckfailed: true
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
-        if: ${{ github.event_name == 'push' }}
-        if: ${{!contains(github.event.commits.*.message, '#skip')${{
+        if: ${{ github.event_name == 'push' && !contains(github.event.commits.*.message, '#skip')${{
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
