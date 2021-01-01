@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "amadeuspokedex" #Must be unique in Heroku
           heroku_email: "scramblegf@gmail.com"
+          healthcheck: "https://amadeuspokedex.herokuapp.com/health"
+          checkstring: "ok"
